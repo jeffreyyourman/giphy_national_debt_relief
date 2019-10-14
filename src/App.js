@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import SearchBar from './components/SearchBar';
+import DisplayScreen from './components/DisplayScreen';
+import axios from 'axios';
 
 function App() {
+  const [term, setTerm] = useState('');
+  const [response, setResponse] = useState(null);
+
+  const searchSubmit = async (searchTerm) => {
+    const giphyResponse = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=luf1CU9IkTZFVRTAyuC7dkaTcL8utidh&q=${searchTerm}&limit=25&offset=0&rating=G&lang=en`);
+    console.log(giphyResponse)
+    setResponse(giphyResponse.data);
+  }
+
+  useEffect(()=>{
+    searchSubmit('nba') //giphy initial render
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SearchBar term={term} onTermChange={setTerm} onSubmit={()=>searchSubmit(term)}/>
+      <DisplayScreen data={response}/>
     </div>
   );
 }
