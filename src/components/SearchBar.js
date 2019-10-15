@@ -4,13 +4,20 @@ import "../styles/searchBar.css";
 const SearchBar = ({ term, onTermChange, onSubmit }) => {
   return (
     <div className="searchDiv">
-      <input
-        className="inputStyles"
-        type="text"
-        value={term}
-        onChange={e => onTermChange(e.target.value)}
-      />
-      <button className="submitBtn" onClick={onSubmit}>Submit</button>
+      <label className="inputLabel">
+        <input
+          className="inputStyles"
+          placeholder="Please type in a key word or phrase"
+          type="text"
+          value={term}
+          onChange={e => onTermChange(e.target.value)}
+        />
+      </label>
+      <input className="submitBtn" type="submit" value="Search" onClick={onSubmit}/>
+
+      {/* <button className="submitBtn" onClick={onSubmit}>
+        Submit
+      </button> */}
     </div>
   );
 };
