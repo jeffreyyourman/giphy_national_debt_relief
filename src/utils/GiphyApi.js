@@ -20,11 +20,13 @@ export default () => {
       );
       setResponse(giphyResponse.data);
     } catch (err) {
-      console.log('err', err)
       setErrorMessage('Something went wrong');
     }
   };
 
+  useEffect(()=>{
+    searchApi('hi there');
+  }, [])
   return [searchApi, response, errorMessage];
 };
-// `https://api.giphy.com/v1/gifs/search?api_key=luf1CU9IkTZFVRTAyuC7dkaTcL8utidh&offset=0`,
+// 'key: luf1CU9IkTZFVRTAyuC7dkaTcL8utidh'

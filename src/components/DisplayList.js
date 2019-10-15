@@ -1,25 +1,23 @@
-import React from 'react';
-import DisplayGifs from './DisplayGif';
-import '../styles/displayList.css'
+import React from "react";
+import DisplayGifs from "./DisplayGif";
+import "../styles/displayList.css";
 
-const DisplayScreen = ({ data, showErrorMsg }) => {
-// console.log(showErrorMsg);
-  if(showErrorMsg.length !== 0 ) {
-    return <h1 className="center">{showErrorMsg}</h1> 
+const DisplayList = ({ dataGif, showErrorMsg }) => {
+  
+  if (showErrorMsg.length) {
+    return <h1 className="errorHeading">{showErrorMsg}</h1>;
   }
-  if(!data) {
-    return <h1 className="center">loading...</h1>
+  
+  if (!dataGif) {
+    return <h1 className="loadingGifs">loading...</h1>;
   }
+  const {data} = dataGif;
+  
+  const gifs = data.map(eachGif => {
+    return <DisplayGifs key={eachGif.id} individualGifs={eachGif} />;
+  });
 
-  const gifs = data.data.map((eachGif)=>{
-    return <DisplayGifs key={eachGif.id} individualGifs={eachGif}/>
-  })
+  return <div className="gifList">{gifs}</div>;
+};
 
-  return (
-    <div className="gifList">
-      {gifs}
-    </div>
-  );
-}
-
-export default DisplayScreen;
+export default DisplayList;

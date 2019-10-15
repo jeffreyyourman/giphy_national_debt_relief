@@ -1,9 +1,14 @@
 .gifList {
-  width: '100%'; 
+  width: 100%; 
   text-align: center;
   margin-top: 25px;
 }
-.center {
-  width: '100%'; 
+.loadingGifs {
+  width: 100%; 
+  text-align: center;
+}
+
+.errorHeading {
+  width: 100%; 
   text-align: center;
 }

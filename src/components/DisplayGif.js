@@ -2,13 +2,13 @@ import React from "react";
 import "../styles/displayGif.css";
 
 const DisplayGifs = ({ individualGifs }) => {
-  // displaying individual gifs here through img tag.
+  const { images: {downsized: {url}}, title } = individualGifs
   return (
     <>
       <img
         className="gif"
-        src={individualGifs.images.downsized.url}
-        alt={individualGifs.title}
+        src={url}
+        alt={title}
       />
     </>
   );
