@@ -29,4 +29,3 @@ export default () => {
   }, [])
   return [searchApi, response, errorMessage];
 };
-// 'key: luf1CU9IkTZFVRTAyuC7dkaTcL8utidh'

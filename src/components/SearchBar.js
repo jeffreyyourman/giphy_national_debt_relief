@@ -14,10 +14,6 @@ const SearchBar = ({ term, onTermChange, onSubmit }) => {
         />
       </label>
       <input className="submitBtn" type="submit" value="Search" onClick={onSubmit}/>
-
-      {/* <button className="submitBtn" onClick={onSubmit}>
-        Submit
-      </button> */}
     </div>
   );
 };
