@@ -1,4 +1,5 @@
 .searchDiv {
+  display: -ms-flexbox;
   display: flex;
   justify-content: center;
 }
