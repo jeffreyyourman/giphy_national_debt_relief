@@ -1,5 +1,30 @@
-// import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from 'axios';
 
+export default () => {
+  const [response, setResponse] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
 
-// clientId  luf1CU9IkTZFVRTAyuC7dkaTcL8utidh
+  const searchApi = async searchTerm => {
+    try {
+      const giphyResponse = await axios.get(
+        `https://api.giphy.com/v1/gifs/search?api_key=luf1CU9IkTZFVRTAyuC7dkaTcL8utidh&offset=0`,
+        {
+          params: {
+            limit: 10,
+            q: searchTerm,
+            rating: "G",
+            lang: "en"
+          }
+        }
+      );
+      setResponse(giphyResponse.data);
+    } catch (err) {
+      console.log('err', err)
+      setErrorMessage('Something went wrong');
+    }
+  };
 
+  return [searchApi, response, errorMessage];
+};
+// `https://api.giphy.com/v1/gifs/search?api_key=luf1CU9IkTZFVRTAyuC7dkaTcL8utidh&offset=0`,

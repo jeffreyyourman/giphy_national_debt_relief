@@ -1,27 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from './components/SearchBar';
-import DisplayScreen from './components/DisplayList';
-import axios from 'axios';
+import DisplayList from './components/DisplayList';
+import GiphyApi from './utils/GiphyApi';
+// import axios from 'axios';
 
 function App() {
   const [term, setTerm] = useState('');
-  const [response, setResponse] = useState(null);
+  const [searchApi, response, errorMessage] = GiphyApi();
 
-  const searchSubmit = async (searchTerm) => {
-    const giphyResponse = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=luf1CU9IkTZFVRTAyuC7dkaTcL8utidh&q=${searchTerm}&limit=10&offset=0&rating=G&lang=en`);
-    console.log(giphyResponse)
-    setResponse(giphyResponse.data);
-    setTerm('')
-  }
+  // const [response, setResponse] = useState(null);
+
+  // const searchSubmit = async (searchTerm) => {
+  //   const giphyResponse = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=luf1CU9IkTZFVRTAyuC7dkaTcL8utidh&offset=0`, {
+  //     params: {
+  //       limit: 10,
+  //       q: searchTerm,
+  //       rating: 'G',
+  //       lang:'en'
+  //     }
+  //   });
+  //   setResponse(giphyResponse.data);
+  //   setTerm('')
+  // }
 
   useEffect(()=>{
-    searchSubmit('nba') //giphy initial render
+    searchApi('nba') //giphy initial render
   }, [])
 
   return (
     <div className="App">
-      <SearchBar term={term} onTermChange={setTerm} onSubmit={()=>searchSubmit(term)}/>
-      <DisplayScreen data={response}/>
+      <SearchBar term={term} onTermChange={setTerm} onSubmit={()=>searchApi(term)}/>
+      <DisplayList data={response} showErrorMsg={errorMessage}/>
     </div>
   );
 }
